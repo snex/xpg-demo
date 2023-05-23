@@ -1,0 +1,50 @@
+<div id="<%= dom_id order %>">
+  <div>
+    <strong>Xpg invoice:</strong>
+    <%= order.xpg_invoice_id %>
+  </div>
+  <div>
+    <strong>Xpg nonce:</strong>
+    <%= order.xpg_nonce %>
+  </div>
+  <div>
+    <strong>Status:</strong>
+    <%= order.status %>
+  </div>
+  <div>
+    <strong>Approx Time to Expire:</strong>
+    <% if order.invoice_details.blank? %>
+      Invoice has been purged from XPG
+    <% else %>
+      <%= distance_of_time_in_words(order.invoice_details.expires_at, Time.current.utc) %>
+    <% end %>
+  </div>
+  <div>
+    <strong>Amount Owed:</strong>
+    <%= order.invoice_details&.amount || 'Invoice has been purged from XPG' %>
+  </div>
+  <div>
+    <strong>Address To Send To:</strong>
+    <%= order.invoice_details&.incoming_address || 'Invoice has been purged from XPG' %>
+  </div>
+  <div>
+    <strong>Payment ID:</strong>
+    <%= order.invoice_details&.payment_id || 'Invoice has been purged from XPG' %>
+  </div>
+  <div>
+    <strong>Estimated Confirm Time After Payment Received:</strong>
+    <% if order.invoice_details.blank? %>
+      Invoice has been purged from XPG
+    <% else %>
+      <%= distance_of_time_in_words(order.invoice_details.estimated_confirm_time.seconds) %>
+    <% end %>
+  </div>
+  <% if order.qr_code.attached? %>
+    <div>
+      <strong>Payment QR Code:</strong>
+      <div class="alert alert-danger">DO NOT USE THIS ON A MAINNET MONERO WALLET YOU CAN LOSE YOUR COINS FOREVER. THIS IS JUST A DEMO.</div>
+      <%= order.qr_code_html.html_safe %>
+      <div class="alert alert-danger">DO NOT USE THIS ON A MAINNET MONERO WALLET YOU CAN LOSE YOUR COINS FOREVER. THIS IS JUST A DEMO.</div>
+    </div>
+  <% end %>
+</div>

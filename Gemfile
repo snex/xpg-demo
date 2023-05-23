@@ -38,6 +38,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem 'activeresource'
 gem 'clearance'
+gem 'httparty'
 gem 'faker'
 
 # Use Sass to process CSS
