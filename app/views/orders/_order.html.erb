@@ -12,6 +12,29 @@
     <%= order.status %>
   </div>
   <div>
+    <strong>Payments Received:</strong>
+    <% if order.invoice_details.blank? %>
+      Invoice has been purged from XPG
+    <% else %>
+      <% order.invoice_details.payments.each_with_index do |payment, i| %>
+        <div class="card">
+          <div>
+            <strong>Amount:</strong>
+            <%= payment.amount %>
+          </div>
+          <div>
+            <strong>Confirmations:</strong>
+            <%= payment.confirmations %>
+          </div>
+          <div>
+            <strong>Necessary Confirmations:</strong>
+            <%= payment.necessary_confirmations %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
     <strong>Approx Time to Expire:</strong>
     <% if order.invoice_details.blank? %>
       Invoice has been purged from XPG
@@ -20,7 +43,7 @@
     <% end %>
   </div>
   <div>
-    <strong>Amount Owed:</strong>
+    <strong>Total Amount Owed:</strong>
     <%= order.invoice_details&.amount || 'Invoice has been purged from XPG' %>
   </div>
   <div>

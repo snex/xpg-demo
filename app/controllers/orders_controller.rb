@@ -30,13 +30,7 @@ class OrdersController < ApplicationController
 
   def update_order_status
     @order = Order.find_by(xpg_nonce: params[:nonce])
-    new_status = params[:status]
-
-    if new_status == 'payment_witnessed'
-      new_status = "#{params[:status]} (#{params[:confirmations].to_i}/#{params[:necessary_confirmations]} confirms)"
-    end
-
-    @order.update(status: new_status)
+    @order.update(status: params[:status])
     @order.qr_code.purge
   end
 

@@ -33,5 +33,9 @@ module XpgDemo
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.xpg_host = ENV.fetch('XPG_HOST')
+    config.xpg_demo_host = ENV.fetch('XPG_DEMO_HOST')
+    config.xpg_demo_port = ENV.fetch('XPG_DEMO_PORT', '80')
   end
 end

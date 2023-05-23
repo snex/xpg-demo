@@ -13,7 +13,7 @@ class Order < ApplicationRecord
 
   def qr_code_html
     return '' unless qr_code.attached?
-    ActiveStorage::Current.url_options = { protocol: 'http', host: 'xpg-demo.xens.org' }
+    ActiveStorage::Current.url_options = { protocol: 'http', host: Rails.application.config.xpg_demo_host, port: Rails.application.config.xpg_demo_port }
     HTTParty.get(qr_code.url)
   end
 
