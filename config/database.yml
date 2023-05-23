@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: xpg_demo_production
-  username: xpg_demo
-  password: <%= ENV["XPG_DEMO_DATABASE_PASSWORD"] %>
+  port: 6432
+  prepared_statements: false
+  advisory_locks: false
