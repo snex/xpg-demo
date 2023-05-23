@@ -6,7 +6,7 @@ Clearance.configure do |config|
   config.redirect_url = '/'
   config.rotate_csrf_on_sign_in = true
   config.routes = true
-  config.secure_cookie = !Rails.env.test?
-  config.signed_cookie = true
+  config.secure_cookie = false
+  config.signed_cookie = false
   config.cookie_domain = ->(request) { request.host }
 end
